@@ -1,0 +1,47 @@
+{
+  "engine": "gtts",
+  "language": "en",
+  "total_sec": 24.93,
+  "scenes": [
+    {
+      "index": 0,
+      "scene": "hook",
+      "text": "Deep beneath the noise of the internet... a machine was quietly built.",
+      "file": "output/voice/scene_00.mp3",
+      "start_sec": 0.0,
+      "duration_sec": 5.208,
+      "engine": "gtts",
+      "voice": "gtts-en"
+    },
+    {
+      "index": 1,
+      "scene": "reveal",
+      "text": "Not to imitate what already works — but to reconstruct, how attention itself... is earned.",
+      "file": "output/voice/scene_01.mp3",
+      "start_sec": 5.758,
+      "duration_sec": 7.152,
+      "engine": "gtts",
+      "voice": "gtts-en"
+    },
+    {
+      "index": 2,
+      "scene": "proof",
+      "text": "Every scene, every sound, every cut... engineered in three dimensions.",
+      "file": "output/voice/scene_02.mp3",
+      "start_sec": 13.46,
+      "duration_sec": 5.808,
+      "engine": "gtts",
+      "voice": "gtts-en"
+    },
+    {
+      "index": 3,
+      "scene": "outro",
+      "text": "This... is the Viral Three D Machine. Built to go deeper.",
+      "file": "output/voice/scene_03.mp3",
+      "start_sec": 19.818,
+      "duration_sec": 5.112,
+      "engine": "gtts",
+      "voice": "gtts-en"
+    }
+  ]
+}

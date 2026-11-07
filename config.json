@@ -1,0 +1,53 @@
+{
+  "topic": "How a viral 3D video machine reconstructs attention itself",
+  "style": "netflix-documentary-3d",
+
+  "voice": {
+    "engine": "edge-tts",
+    "gender": "male",
+    "deep": true,
+    "voice": "en-US-AndrewNeural",
+    "fallbacks": [
+      "en-US-ChristopherNeural",
+      "en-US-BrianNeural",
+      "en-US-GuyNeural",
+      "en-US-SteffanNeural"
+    ],
+    "rate": "-10%",
+    "pitch": "-4Hz",
+    "volume": "+0%"
+  },
+
+  "video": {
+    "resolution": "1080x1920",
+    "fps": 30,
+    "duration_target_sec": 45,
+    "theme": "reconstruction-3d",
+    "sfx": ["whoosh", "boom", "sparkle", "tick", "ding", "click"]
+  },
+
+  "test": {
+    "duration_sec": 15,
+    "resolution": "540x960",
+    "fps": 30
+  },
+
+  "script": [
+    {
+      "scene": "hook",
+      "text": "Deep beneath the noise of the internet... a machine was quietly built."
+    },
+    {
+      "scene": "reveal",
+      "text": "Not to imitate what already works — but to reconstruct, how attention itself... is earned."
+    },
+    {
+      "scene": "proof",
+      "text": "Every scene, every sound, every cut... engineered in three dimensions."
+    },
+    {
+      "scene": "outro",
+      "text": "This... is the Viral Three D Machine. Built to go deeper."
+    }
+  ]
+}

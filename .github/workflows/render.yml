@@ -1,0 +1,66 @@
+name: Render 3D Video
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'config.json'
+      - 'scripts/**'
+      - 'plugin_3d/**'
+  workflow_dispatch:
+    inputs:
+      test:
+        description: 'Render 15s TEST video instead of full'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest   # heavy render always happens here, never on phone
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ffmpeg (Alpine-style deps are handled here)
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install free TTS engines (no API keys needed)
+        run: pip install -r requirements.txt
+
+      - name: Free voiceover (gTTS only — no edge-tts)
+        env:
+          SKIP_EDGE_TTS: '1'
+        run: python3 scripts/build_voiceover.py
+
+      - name: Procedural SFX
+        run: node plugin_3d/scripts/make-sfx.mjs
+
+      - name: Render 15s TEST video
+        if: ${{ github.event.inputs.test == 'true' }}
+        run: node plugin_3d/scripts/build.mjs --test
+
+      - name: Render FULL video
+        if: ${{ github.event.inputs.test != 'true' }}
+        run: node plugin_3d/scripts/build.mjs
+
+      - name: Upload artifact (final-video) — video is never pushed to the repo
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-video
+          path: |
+            output/*.mp4
+            output/voice/timings.json
+          if-no-files-found: error

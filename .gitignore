@@ -1,0 +1,9 @@
+output/tmp_*
+output/voice/*.mp3
+node_modules/
+*.pyc
+.local/
+.opencode/
+.axs/
+.github_token
+output/*.mp4
