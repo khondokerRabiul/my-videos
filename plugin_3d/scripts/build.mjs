@@ -71,7 +71,7 @@ const pass1 = spawn(FFM, [
   '-pix_fmt', 'yuv420p', '-movflags', '+faststart', outV,
 ], { stdio: ['pipe', 'inherit', 'inherit'] });
 
-const renderer = createRenderer(W, H, FPS, timeline);
+const renderer = createRenderer(W, H, FPS, timeline, { titles: cfg.titles });
 const totalFrames = Math.round(timeline * FPS);
 const frameBytes = W * H * 3;
 console.log(`[render] ${W}x${H} @ ${FPS}fps, timeline=${timeline.toFixed(2)}s, frames=${totalFrames}`);

@@ -1,5 +1,5 @@
 {
-  "topic": "How a viral 3D video machine reconstructs attention itself",
+  "topic": "Why your phone is designed to be addictive",
   "style": "netflix-documentary-3d",
 
   "voice": {
@@ -32,22 +32,29 @@
     "fps": 30
   },
 
+  "titles": [
+    "BUILT TO ADDICT",
+    "DESIGNED AFTER YOU",
+    "EVERY TRIGGER TESTED",
+    "THE ATTENTION ECONOMY"
+  ],
+
   "script": [
     {
       "scene": "hook",
-      "text": "Deep beneath the noise of the internet... a machine was quietly built."
+      "text": "Every scroll you take today... was designed before you woke up. Your phone is built to be addictive."
     },
     {
       "scene": "reveal",
-      "text": "Not to imitate what already works — but to reconstruct, how attention itself... is earned."
+      "text": "Not by accident. Teams of engineers, running thousands of tests... against one goal. Keep you scrolling."
     },
     {
       "scene": "proof",
-      "text": "Every scene, every sound, every cut... engineered in three dimensions."
+      "text": "Infinite feeds. Auto play. Red dots. Each trigger... engineered to hold you."
     },
     {
       "scene": "outro",
-      "text": "This... is the Viral Three D Machine. Built to go deeper."
+      "text": "This is the attention economy. Your focus... is the product. Now you know."
     }
   ]
 }

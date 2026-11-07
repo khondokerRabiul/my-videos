@@ -1,45 +1,45 @@
 {
   "engine": "gtts",
   "language": "en",
-  "total_sec": 24.93,
+  "total_sec": 32.01,
   "scenes": [
     {
       "index": 0,
       "scene": "hook",
-      "text": "Deep beneath the noise of the internet... a machine was quietly built.",
+      "text": "Every scroll you take today... was designed before you woke up. Your phone is built to be addictive.",
       "file": "output/voice/scene_00.mp3",
       "start_sec": 0.0,
-      "duration_sec": 5.208,
+      "duration_sec": 7.08,
       "engine": "gtts",
       "voice": "gtts-en"
     },
     {
       "index": 1,
       "scene": "reveal",
-      "text": "Not to imitate what already works — but to reconstruct, how attention itself... is earned.",
+      "text": "Not by accident. Teams of engineers, running thousands of tests... against one goal. Keep you scrolling.",
       "file": "output/voice/scene_01.mp3",
-      "start_sec": 5.758,
-      "duration_sec": 7.152,
+      "start_sec": 7.63,
+      "duration_sec": 9.816,
       "engine": "gtts",
       "voice": "gtts-en"
     },
     {
       "index": 2,
       "scene": "proof",
-      "text": "Every scene, every sound, every cut... engineered in three dimensions.",
+      "text": "Infinite feeds. Auto play. Red dots. Each trigger... engineered to hold you.",
       "file": "output/voice/scene_02.mp3",
-      "start_sec": 13.46,
-      "duration_sec": 5.808,
+      "start_sec": 17.996,
+      "duration_sec": 7.272,
       "engine": "gtts",
       "voice": "gtts-en"
     },
     {
       "index": 3,
       "scene": "outro",
-      "text": "This... is the Viral Three D Machine. Built to go deeper.",
+      "text": "This is the attention economy. Your focus... is the product. Now you know.",
       "file": "output/voice/scene_03.mp3",
-      "start_sec": 19.818,
-      "duration_sec": 5.112,
+      "start_sec": 25.818,
+      "duration_sec": 6.192,
       "engine": "gtts",
       "voice": "gtts-en"
     }

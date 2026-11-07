@@ -5,7 +5,7 @@
 // Scenes: starfield hook -> rotating wireframe globe reveal -> engineered
 // grid/cube proof -> hyperspace outro. All synced to timings.json.
 
-export function createRenderer(W, H, fps, totalSec) {
+export function createRenderer(W, H, fps, totalSec, opts = {}) {
   // seeded xorshift for deterministic output
   let seed = 1337;
   const rand = () => {
@@ -222,7 +222,7 @@ export function createRenderer(W, H, fps, totalSec) {
     [255, 220, 160],  // warm white  — outro
   ];
 
-  const TITLES = [
+  const TITLES = opts.titles || [
     'A MACHINE WAS BUILT',
     'RECONSTRUCTING ATTENTION',
     'EVERY CUT IS ENGINEERED',
