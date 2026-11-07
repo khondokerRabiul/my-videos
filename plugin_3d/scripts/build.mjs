@@ -77,8 +77,9 @@ const frameBytes = W * H * 3;
 console.log(`[render] ${W}x${H} @ ${FPS}fps, timeline=${timeline.toFixed(2)}s, frames=${totalFrames}`);
 
 const sceneAt = t => {
-  const tail = TEST && !used[3] ? timeline - 1.8 : -1; // outro title drop in short tests
-  if (t >= tail && tail > 0) return [3, t - tail, 0];
+  const LAST = Math.max(0, cfg.script.length - 1);
+  const tail = TEST ? timeline - 1.8 : -1; // outro title drop in short tests
+  if (t >= tail && tail > 0) return [LAST, t - tail, 0];
   let idx = 0;
   for (let i = 0; i < used.length; i++) if (t >= used[i].start) idx = i;
   const age = t - used[idx].start;

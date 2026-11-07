@@ -30,6 +30,12 @@ export function createRenderer(W, H, fps, totalSec, opts = {}) {
   for (let i = 0; i < 60; i++)
     dust.push({ x: (rand() - 0.5) * 800, y: (rand() - 0.5) * 600 - 60, z: -1200 + rand() * 1200, r: 14 + rand() * 26 });
 
+  // floating wireframe banknotes (money-in-the-dark flavor) + tape-wall noise
+  const hash = (a, b) => Math.abs(Math.sin(a * 12.9898 + b * 78.233) * 43758.5453) % 1;
+  const bills = [];
+  for (let i = 0; i < 24; i++)
+    bills.push({ x: (rand() - 0.5) * 1000, y: (rand() - 0.5) * 760 - 40, z: -1150 + rand() * 1450, sp: 0.22 + rand() * 0.45, ph: rand() * 6.28, sz: 0.6 + rand() * 0.9 });
+
   const vign = new Float32Array(W * H);
   for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
     const dx = (x / W - 0.5) * 2, dy = (y / H - 0.5) * 2;
@@ -215,17 +221,73 @@ export function createRenderer(W, H, fps, totalSec, opts = {}) {
     }
   }
 
+  function drawBills(t, tint, spd = 2.2) {
+    // wireframe banknotes drifting through the void — double border + collar band
+    const bc = [110, 235, 170]; // bill-green
+    for (const q of bills) {
+      q.z += spd; if (q.z > 330) { q.z -= 1500; q.x = (rand() - 0.5) * 1000; q.y = (rand() - 0.5) * 760 - 40; }
+      const ry = t * q.sp + q.ph, rx = 0.5 + 0.3 * Math.sin(t * 0.7 + q.ph);
+      const cry = Math.cos(ry), sry = Math.sin(ry), crx = Math.cos(rx), srx = Math.sin(rx);
+      const w = 92 * q.sz, h = 48 * q.sz;
+      const pt = (u, v) => {
+        const x1 = u * cry, z1 = u * sry;
+        const y2 = v * crx - z1 * srx, z2 = v * srx + z1 * crx;
+        return project(q.x + x1, q.y + y2, q.z + z2);
+      };
+      const seg = (P, Q, a) => { if (P && Q) line(P[0], P[1], Q[0], Q[1], bc[0], bc[1], bc[2], a); };
+      const dep = Math.min(1, Math.max(0.12, (q.z + 1150) / 1350));
+      const a = (0.14 + 0.5 * dep) * (0.8 + 0.2 * Math.sin(t * 2 + q.ph));
+      const c1 = pt(-w, -h), c2 = pt(w, -h), c3 = pt(w, h), c4 = pt(-w, h);
+      seg(c1, c2, a); seg(c2, c3, a); seg(c3, c4, a); seg(c4, c1, a);
+      const iw = w * 0.84, ih = h * 0.78;
+      const g1 = pt(-iw, -ih), g2 = pt(iw, -ih), g3 = pt(iw, ih), g4 = pt(-iw, ih);
+      seg(g1, g2, a * 0.55); seg(g2, g3, a * 0.55); seg(g3, g4, a * 0.55); seg(g4, g1, a * 0.55);
+      const b1 = pt(-iw * 0.7, 0), b2 = pt(iw * 0.7, 0);
+      seg(b1, b2, a * 0.8); // collar band
+      const t1 = pt(0, -ih * 0.5), t2 = pt(0, ih * 0.5);
+      seg(t1, t2, a * 0.35); // spine hint
+    }
+  }
+
+  function drawLedger(t, tint) {
+    // distant data-tape wall: rows of glowing ledger ticks + a scanning highlight,
+    // with verticals rising like a print-counter
+    const z = 460, rows = 15, cols = 15;
+    const scanR = (t * 2.4) % rows;
+    for (let r = 0; r < rows; r++) {
+      const y = r * 46 - 210;
+      for (let c = 0; c < cols; c++) {
+        const x0 = (c - (cols - 1) / 2) * 78 + 30;
+        const len = 30 + hash(r + 7.3, c + 2.1) * 52;
+        const h1 = hash(r * 3.7, c * 5.1);
+        const near = Math.max(0, 1 - Math.abs(r - scanR));
+        const p1 = project(x0, y, z), p2 = project(x0 + len, y, z);
+        const a = 0.07 + 0.22 * (r / rows) + near * 0.5 * (0.6 + 0.4 * Math.sin(t * 3 + c * 1.7));
+        if (p1 && p2) line(p1[0], p1[1], p2[0], p2[1], tint[0], tint[1], tint[2], a);
+        if (h1 > 0.58) {
+          const bh = 26 + h1 * 120 * (0.55 + 0.45 * Math.abs(Math.sin(t * 0.8 + r + c * 0.6)));
+          const b1 = project(x0 + 12, y - bh, z), b2 = project(x0 + 12, y, z);
+          if (b1 && b2) line(b1[0], b1[1], b2[0], b2[1], tint[0], tint[1], tint[2], 0.1 + 0.32 * (h1 - 0.58));
+        }
+      }
+    }
+  }
+
   const TINTS = [
-    [90, 220, 255],   // teal cyan   — hook
-    [70, 140, 255],   // deep blue   — reveal
-    [255, 160, 60],   // amber       — proof
-    [255, 220, 160],  // warm white  — outro
+    [90, 220, 255],   // teal cyan    — hook
+    [70, 140, 255],   // deep blue    — reveal
+    [120, 255, 170],  // money green  — ledger
+    [255, 160, 60],   // amber        — proof
+    [255, 80, 90],    // alarm red    — twist
+    [255, 220, 160],  // warm white   — outro
   ];
 
   const TITLES = opts.titles || [
     'A MACHINE WAS BUILT',
     'RECONSTRUCTING ATTENTION',
+    'CURRENCY OUT OF CODE',
     'EVERY CUT IS ENGINEERED',
+    'THE BILL ARRIVES',
     'THE VIRAL 3D MACHINE',
   ];
 
@@ -248,7 +310,7 @@ export function createRenderer(W, H, fps, totalSec, opts = {}) {
         frame[i + x * 3] = r; frame[i + x * 3 + 1] = g; frame[i + x * 3 + 2] = b;
       }
     }
-    const tint = TINTS[Math.min(sceneIdx, 3)];
+    const tint = TINTS[sceneIdx % TINTS.length];
     // dust motes
     for (const d of dust) {
       d.z += 0.4; if (d.z > 200) d.z -= 1400;
@@ -259,18 +321,21 @@ export function createRenderer(W, H, fps, totalSec, opts = {}) {
       }
     }
     switch (sceneIdx) {
-      case 0: drawStars(t, 380, tint); break;
+      case 0: drawStars(t, 380, tint); drawBills(t, tint); break;                       // hook: money in the dark
       case 1: drawStars(t, 130, tint); drawGlobe(t, tint); drawGrid(t, [90, 160, 255], false); break;
-      case 2: drawGrid(t, tint, true); drawMonoliths(t, tint); break;
-      case 3: drawHyperspace(t, tint); break;
+      case 2: drawStars(t, 85, tint); drawLedger(t, tint); drawBills(t, tint, 1.4); break; // the ledger tape wall
+      case 3: drawGrid(t, tint, true); drawMonoliths(t, tint); break;                    // proof
+      case 4: drawStars(t, 640, tint); drawBills(t, tint, 6.5); drawGrid(t, tint, true); drawMonoliths(t, tint); break; // twist: the bill arrives
+      default: drawHyperspace(t, tint); break;
     }
     // titles
-    const T = TITLES[Math.min(sceneIdx, 3)];
+    const T = TITLES[Math.min(sceneIdx, TITLES.length - 1)];
     const tAnim = titleAnim(sceneAge);
     if (tAnim.a > 0.01) {
+      const outro = sceneIdx >= TITLES.length - 1;
       const size = (H < 700 ? H * 0.026 : H * 0.024) * tAnim.scale;
-      drawText(T, W * 0.5, H * (sceneIdx === 3 ? 0.6 : 0.72), size,
-               tint[0], tint[1], tint[2], tAnim.a, sceneIdx === 3 ? 3 : 2);
+      drawText(T, W * 0.5, H * (outro ? 0.6 : 0.72), size,
+               tint[0], tint[1], tint[2], tAnim.a, outro ? 3 : 2);
     }
     // HUD (centered at thirds so they never collide)
     drawText('3D RECON', W * 0.27, 14, H * 0.006, 160, 220, 255, 0.5, 1);

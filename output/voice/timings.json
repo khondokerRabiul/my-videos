@@ -1,45 +1,65 @@
 {
   "engine": "gtts",
   "language": "en",
-  "total_sec": 32.01,
+  "total_sec": 48.254,
   "scenes": [
     {
       "index": 0,
       "scene": "hook",
-      "text": "Every scroll you take today... was designed before you woke up. Your phone is built to be addictive.",
+      "text": "In one single year... the Federal Reserve created nearly six trillion dollars. Not with printing presses. With a keystroke.",
       "file": "output/voice/scene_00.mp3",
       "start_sec": 0.0,
-      "duration_sec": 7.08,
+      "duration_sec": 9.96,
       "engine": "gtts",
       "voice": "gtts-en"
     },
     {
       "index": 1,
       "scene": "reveal",
-      "text": "Not by accident. Teams of engineers, running thousands of tests... against one goal. Keep you scrolling.",
+      "text": "No gold moved. No trucks rolled. Digital credit... written into existence. Overnight.",
       "file": "output/voice/scene_01.mp3",
-      "start_sec": 7.63,
-      "duration_sec": 9.816,
+      "start_sec": 10.51,
+      "duration_sec": 8.112,
       "engine": "gtts",
       "voice": "gtts-en"
     },
     {
       "index": 2,
-      "scene": "proof",
-      "text": "Infinite feeds. Auto play. Red dots. Each trigger... engineered to hold you.",
+      "scene": "question",
+      "text": "So who decided this? Who watched it happen? And who... carries the bill?",
       "file": "output/voice/scene_02.mp3",
-      "start_sec": 17.996,
-      "duration_sec": 7.272,
+      "start_sec": 19.172,
+      "duration_sec": 6.0,
       "engine": "gtts",
       "voice": "gtts-en"
     },
     {
       "index": 3,
-      "scene": "outro",
-      "text": "This is the attention economy. Your focus... is the product. Now you know.",
+      "scene": "proof",
+      "text": "Trillion dollar flows, watched by the few who have access. Wall Street sees them first. You see... the price.",
       "file": "output/voice/scene_03.mp3",
-      "start_sec": 25.818,
-      "duration_sec": 6.192,
+      "start_sec": 25.722,
+      "duration_sec": 8.592,
+      "engine": "gtts",
+      "voice": "gtts-en"
+    },
+    {
+      "index": 4,
+      "scene": "twist",
+      "text": "Inflation is not bad luck. It is the cost of money... created while you slept.",
+      "file": "output/voice/scene_04.mp3",
+      "start_sec": 34.864,
+      "duration_sec": 6.432,
+      "engine": "gtts",
+      "voice": "gtts-en"
+    },
+    {
+      "index": 5,
+      "scene": "outro",
+      "text": "Watch the money. Whoever tracks the trillions... understands tomorrow. Follow.",
+      "file": "output/voice/scene_05.mp3",
+      "start_sec": 41.846,
+      "duration_sec": 6.408,
       "engine": "gtts",
       "voice": "gtts-en"
     }

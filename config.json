@@ -1,5 +1,5 @@
 {
-  "topic": "Why your phone is designed to be addictive",
+  "topic": "The Fed prints trillions — who tracks the trillions",
   "style": "netflix-documentary-3d",
 
   "voice": {
@@ -21,7 +21,7 @@
   "video": {
     "resolution": "1080x1920",
     "fps": 30,
-    "duration_target_sec": 45,
+    "duration_target_sec": 60,
     "theme": "reconstruction-3d",
     "sfx": ["whoosh", "boom", "sparkle", "tick", "ding", "click"]
   },
@@ -33,28 +33,38 @@
   },
 
   "titles": [
-    "BUILT TO ADDICT",
-    "DESIGNED AFTER YOU",
-    "EVERY TRIGGER TESTED",
-    "THE ATTENTION ECONOMY"
+    "TRILLIONS. ONE KEYSTROKE",
+    "MONEY OUT OF CODE",
+    "WHO DECIDES?",
+    "SEEN FIRST BY WALL STREET",
+    "INFLATION IS A BILL",
+    "WATCH THE MONEY"
   ],
 
   "script": [
     {
       "scene": "hook",
-      "text": "Every scroll you take today... was designed before you woke up. Your phone is built to be addictive."
+      "text": "In one single year... the Federal Reserve created nearly six trillion dollars. Not with printing presses. With a keystroke."
     },
     {
       "scene": "reveal",
-      "text": "Not by accident. Teams of engineers, running thousands of tests... against one goal. Keep you scrolling."
+      "text": "No gold moved. No trucks rolled. Digital credit... written into existence. Overnight."
+    },
+    {
+      "scene": "question",
+      "text": "So who decided this? Who watched it happen? And who... carries the bill?"
     },
     {
       "scene": "proof",
-      "text": "Infinite feeds. Auto play. Red dots. Each trigger... engineered to hold you."
+      "text": "Trillion dollar flows, watched by the few who have access. Wall Street sees them first. You see... the price."
+    },
+    {
+      "scene": "twist",
+      "text": "Inflation is not bad luck. It is the cost of money... created while you slept."
     },
     {
       "scene": "outro",
-      "text": "This is the attention economy. Your focus... is the product. Now you know."
+      "text": "Watch the money. Whoever tracks the trillions... understands tomorrow. Follow."
     }
   ]
 }
